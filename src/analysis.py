@@ -58,10 +58,6 @@ def price_buckets(df: pd.DataFrame, bins: int = 5) -> pd.DataFrame:
 
     Returns a DataFrame with columns: price_min, price_max, count.
     """
-    labels = [f"${i:.2f}–${j:.2f}" for i, j in zip(
-        df["Price"].quantile(q=np.linspace(0, 1, bins + 1)[:-1]),
-        df["Price"].quantile(q=np.linspace(0, 1, bins + 1)[1:]),
-    )]
     # Build bin edges from quantiles for even population buckets
     edges = df["Price"].quantile(q=np.linspace(0, 1, bins + 1)).tolist()
     # Avoid duplicate edges when many products share a price
