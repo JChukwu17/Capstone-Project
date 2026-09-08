@@ -1,0 +1,42 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.dll
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment files with secrets
+.env
+.env.local
+.env.*.local
+
+# Generated data
+data/processed/
+data/*.db
+
+# Source data (kept under version control)
+# data/raw/   ← tracked
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Distribution / build
+dist/
+build/
+*.egg-info/
