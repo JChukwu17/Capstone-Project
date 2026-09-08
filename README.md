@@ -9,6 +9,18 @@ A small end-to-end data pipeline that loads a retail product catalogue, cleans a
 3. **Analyse** — summary statistics (avg price, total stock, total value) and a category-level breakdown.
 4. **Persist** — writes the cleaned data to a database and queries back the top products by stock value.
 
+## Data quality
+
+The raw CSV contains three category variants that are normalised automatically during cleaning:
+
+| Raw value | Canonical | Issue      |
+|-----------|-----------|------------|
+| `dairy`   | `Dairy`   | lowercase  |
+| `Bevarages` | `Beverages` | typo   |
+| `snakcs`  | `Snacks`  | typo       |
+
+The mapping lives in `src/config.py` (`CATEGORY_NORMALISATION`) and is applied by `src/data_loader.clean()`. After cleaning the dataset has 5 distinct categories.
+
 ## Database
 
 The pipeline defaults to **SQLite** — a file-based database that needs no server, no credentials, and no setup. The database file is written to `data/processed/freshmart.db` on first run.
