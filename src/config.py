@@ -48,3 +48,12 @@ NUMERIC_COLUMNS = ["Price", "StockQuantity", "StockValue"]
 
 # Value to fill missing numeric entries with (None = drop rows instead).
 FILL_VALUE = float(os.getenv("FRESHMART_FILL_VALUE", "-1"))
+
+# Category normalisation: known misspellings / casing variants mapped to the
+# canonical category name.  Add entries here as data-quality issues are found.
+# Applied in data_loader.clean() after whitespace stripping.
+CATEGORY_NORMALISATION: dict[str, str] = {
+    "dairy": "Dairy",
+    "Bevarages": "Beverages",
+    "snakcs": "Snacks",
+}

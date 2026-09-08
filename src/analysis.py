@@ -8,6 +8,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+import numpy as np
+
 if TYPE_CHECKING:
     import pandas as pd
 
@@ -67,7 +69,7 @@ def price_buckets(df: pd.DataFrame, bins: int = 5) -> pd.DataFrame:
     if len(edges) < 2:
         edges = [df["Price"].min(), df["Price"].max()]
     df_tmp = df.copy()
-    df_tmp["bucket"] = pd.cut(df_tmp["Price"], bins=edge, include_lowest=True)
+    df_tmp["bucket"] = pd.cut(df_tmp["Price"], bins=edges, include_lowest=True)
     counts = df_tmp.groupby("bucket", observed=False).size().reset_index(name="count")
     counts["price_min"] = counts["bucket"].apply(lambda b: b.left if pd.notna(b) else None)
     counts["price_max"] = counts["bucket"].apply(lambda b: b.right if pd.notna(b) else None)

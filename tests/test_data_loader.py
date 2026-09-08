@@ -58,6 +58,18 @@ def test_clean_fill_value_respected(raw_df):
     assert cleaned.loc[0, "Price"] == -1.0
 
 
+def test_clean_category_normalisation_applied(raw_df):
+    """Known misspellings/casing variants are mapped to canonical categories."""
+    df = clean(raw_df)
+    # Three orphaned categories in the raw CSV should be folded into their canonical form
+    assert "dairy" not in df["Category"].unique()
+    assert "Bevarages" not in df["Category"].unique()
+    assert "snakcs" not in df["Category"].unique()
+    # Now we should have exactly 5 distinct categories
+    assert df["Category"].nunique() == 5
+    assert set(df["Category"].unique()) == {"Beverages", "Produce", "Dairy", "Bakery", "Snacks"}
+
+
 def test_clean_drop_on_none_drops_rows(raw_df):
     """Passing fill=None drops rows with any missing numeric value.
 

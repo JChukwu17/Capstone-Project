@@ -11,7 +11,7 @@ from __future__ import annotations
 import pandas as pd
 from pathlib import Path
 
-from .config import CSV_PATH, NUMERIC_COLUMNS, FILL_VALUE
+from .config import CSV_PATH, NUMERIC_COLUMNS, FILL_VALUE, CATEGORY_NORMALISATION
 
 # Sentinel used to distinguish "caller passed fill=None to request dropping"
 # from "caller did not pass fill and we should use the config default".
@@ -62,6 +62,10 @@ def clean(df: pd.DataFrame, fill: float | None = _DROP) -> pd.DataFrame:
     for col in ["ProductName", "Category"]:
         if col in df.columns:
             df[col] = df[col].astype(str).str.strip()
+
+    # Fix known category misspellings / casing variants (config.CATEGORY_NORMALISATION)
+    if "Category" in df.columns and CATEGORY_NORMALISATION:
+        df["Category"] = df["Category"].replace(CATEGORY_NORMALISATION)
 
     # Coerce numeric columns
     for col in NUMERIC_COLUMNS:
