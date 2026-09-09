@@ -26,8 +26,11 @@ data/*.db
 .ipynb_checkpoints/
 
 # IDE
-.vscode/
-.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+!.idea/
 *.swp
 *.swo
 *~
