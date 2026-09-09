@@ -236,3 +236,7 @@ See `requirements.txt` for the pinned versions and `.env.example` for the enviro
 ## License
 
 Personal capstone project — all rights reserved.
+
+## Live demo
+
+The project is showcased on my portfolio site: [jchukwu17.github.io/Professional-portfolio](https://jchukwu17.github.io/Professional-portfolio/) — see the **Work** section for the FreshMart entry, including the price-distribution chart.
